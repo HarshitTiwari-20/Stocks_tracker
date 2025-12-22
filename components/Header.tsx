@@ -2,10 +2,13 @@ import Link from "next/dist/client/link";
 import Image from "next/image";
 import NavItems from "./NavItems";
 import { DropDown } from "./DropDown";
+import TradingWidget from "./TradingWidget";
 
 const Header = () => {
 
   return (
+    <div>
+
     <header className=" sticky top-0 header">
       <div className=" container header-wrapper">
         <Link href="/">
@@ -16,7 +19,10 @@ const Header = () => {
         </nav>
         <DropDown />
       </div>
+
     </header>
+    <TradingWidget />
+    </div>
   )
 }
 

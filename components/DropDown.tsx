@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/navigation"; // Correct import for App Router
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, User, CreditCard, Users, Settings } from "lucide-react"; // Optional icons
+import NavItems from "./NavItems";
 
 export const DropDown = () => {
   const router = useRouter();
@@ -57,7 +58,9 @@ export const DropDown = () => {
 
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel>
+
           <div className="flex flex-col space-y-1">
+
             <p className="text-sm font-medium leading-none">{user.name}</p>
             <p className="text-xs leading-none text-muted-foreground">
               {user.email}
@@ -74,7 +77,7 @@ export const DropDown = () => {
 
         <DropdownMenuItem className="cursor-pointer">
           <CreditCard className="mr-2 h-4 w-4" />
-          <span>Billing</span>
+          <span>Report</span>
         </DropdownMenuItem>
 
         <DropdownMenuItem className="cursor-pointer">
@@ -84,7 +87,7 @@ export const DropDown = () => {
 
         <DropdownMenuItem className="cursor-pointer">
           <Settings className="mr-2 h-4 w-4" />
-          <span>Subscription</span>
+          <span>Settings</span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
@@ -95,6 +98,12 @@ export const DropDown = () => {
         >
           <LogOut className="mr-2 h-4 w-4" />
           <span>Sign Out</span>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+        <div className=" sm:hidden">
+                <NavItems />
+        </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
