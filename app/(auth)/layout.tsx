@@ -35,13 +35,6 @@ export default function Layout() {
             </div>
           </section>
 
-          <section className="auth-left-section">
-
-            
-          </section>
-
-
-
         </main>
     )
 }
