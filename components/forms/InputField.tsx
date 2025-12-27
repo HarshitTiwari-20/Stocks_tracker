@@ -5,11 +5,10 @@ import { UseFormRegister, FieldError, RegisterOptions } from "react-hook-form"
 
 interface FormInputProps {
   name: string;
-  password: string;
   label: string;
   placeholder?: string;
   type?: string;
-  register: UseFormRegister<Record<string, unknown>>;
+  register: UseFormRegister<HTMLInputElement>;
   error?: FieldError;
   validation?: RegisterOptions;
   disabled?: boolean;
@@ -18,7 +17,7 @@ interface FormInputProps {
 
 const InputField = ({
   name,
-  password,
+
   label,
   placeholder,
   type = 'text',
@@ -35,7 +34,7 @@ const InputField = ({
       </Label>
       <Input
         type={type}
-        
+
         id={name}
         placeholder={placeholder}
         disabled={disabled}

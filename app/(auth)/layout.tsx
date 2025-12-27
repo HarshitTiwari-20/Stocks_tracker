@@ -1,16 +1,15 @@
 import Link from "next/link"
 import Image from "next/image"
+import Header from "../../components/Header"
 
-
-
-export default function Layout() {
+export default function Layout({ children }: { children: React.ReactNode }) {
  return (
-
+        <div >
+          <Header />
         <main className="auth-layout">
           <section className="auth-left-section scrollbar-hide-default">
-            <Link href="/" className="auth-logo">
-              <Image src="/assets/icons/logo.svg" alt="Signalist showSymbolLogo" width={140} height={40} />
-            </Link>
+            {children}
+           
           </section>
           <section className="auth-right-section">
             <div className=" z-10 relative lg:mt-4 lg:mb-16">
@@ -30,11 +29,13 @@ export default function Layout() {
 
               </div>
             </div>
-            <div className=" flex-1 relative">
+            <div className=" flex-1 px-2 relative ">
               <Image src="/assets/images/dashboard.png" alt="dashboard" fill className=" object-contain" />
             </div>
           </section>
 
         </main>
+
+        </div>
     )
 }

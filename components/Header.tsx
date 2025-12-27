@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div>
 
-    <header className=" sticky top-0 header">
+    <header className=" sticky  top-0 header">
       <div className=" container header-wrapper">
         <Link href="/">
           <Image src="/assets/icons/logo.svg" alt="Logo" width={140} height={40} className=" h-8 w-auto cursor-pointer" />

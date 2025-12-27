@@ -5,9 +5,16 @@ import InputField from "@/components/forms/InputField";
 import SelectField from "@/components/forms/SelectField";
 import {INVESTMENT_GOALS, } from "@/lib/const";
 import FooterLink from "@/components/forms/FooterLink";
-import {signUpWithEmail} from "@/lib/actions/auth.actions";
+import {signUpWithEmail} from "@/lib/actions/auth";
 import {useRouter} from "next/navigation";
-import {toast} from "sonner";
+
+interface SignUpFormData {
+  fullName: string;
+  email: string;
+  password: string;
+  investmentGoals: string;
+}
+
 
 const SignUp = () => {
 
@@ -23,7 +30,7 @@ const SignUp = () => {
         fullName: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        investmentGoals: ''
       },
       mode: 'onBlur'
     }, );
@@ -42,7 +49,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <h1 className="form-title">Sign Up</h1>
+      <h1 className="form-title pt-7">Sign Up</h1>
       <form onSubmit={handleSubmit( onSubmit)} className="space-y-5">
         <InputField
           name="fullName"
@@ -56,13 +63,14 @@ const SignUp = () => {
           label="Email"
           register={ register }
           error={errors.email}
-          validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/, message: 'Invalid email address' }}
+          validation={{ required: 'Email is required', pattern: { value: /^\w+@\w+\.\w+$/, message: 'Invalid email address' } }}
         />
-          <InputField 
+          <InputField
           name="password"
           label="Password"
           placeholder="At least 8 characters"
           type="password"
+          register={ register }
           error={errors.password}
           validation={{ required: 'Strong password is required', minLength: { value: 8, message: 'Password must be at least 8 characters' } }}
         />
@@ -77,11 +85,11 @@ const SignUp = () => {
               required
           />
 
-           <Button type="submit" disabled={isSubmitting} className="w-full mt-5 bg-blue-700 hover:bg-blue-400">
+           <Button type="submit" disabled={isSubmitting} className="w-full mt-5 bg-blue-700 hover:bg-blue-400 text-white">
             {isSubmitting? 'Creating Account...': 'Start Your Journey'}
 
             </Button>
-            <FooterLink text="Already have an account? Sign In" linkText="Sign In" href="/sign-in" />
+            <FooterLink text="Already have an account? " linkText="Sign In" href="/sign-in" />
 
       </form>
 
