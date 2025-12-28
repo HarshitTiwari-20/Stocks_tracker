@@ -3,7 +3,7 @@
 
 import useTradingViewWidget from '@/hooks/useTradingViewWidgets';
 import { cn } from '@/lib/utils';
-import React, { useRef, memo } from 'react';
+import React, { memo } from 'react';
 
 
 interface TradingWidgetProps {
@@ -23,7 +23,7 @@ function TradingWidget({
 }: TradingWidgetProps) {
   const containerRef = useTradingViewWidget( scriptUrl, config, height );
 
-  
+
   return (
         <div className="w-full">
             {title && <h3 className="font-semibold text-2xl text-gray-100 mb-5">{title}</h3>}

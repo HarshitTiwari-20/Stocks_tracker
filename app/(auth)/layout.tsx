@@ -1,4 +1,3 @@
-import Link from "next/link"
 import Image from "next/image"
 import Header from "../../components/Header"
 
@@ -9,12 +8,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <main className="auth-layout">
           <section className="auth-left-section scrollbar-hide-default">
             {children}
-           
+
           </section>
           <section className="auth-right-section">
             <div className=" z-10 relative lg:mt-4 lg:mb-16">
               <blockquote className="auth-blockquote">
-                Let's build and earn something amazing together.
+                Let&apos;s build and earn something amazing together.
               </blockquote>
               <div className="flex item-center justify-between">
                 <div>

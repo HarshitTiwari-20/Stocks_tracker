@@ -1,4 +1,4 @@
-import { Controller, Control, FieldError } from "react-hook-form";
+import { Controller, Control, FieldError, FieldValues } from "react-hook-form";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
@@ -8,7 +8,7 @@ interface SelectFieldProps {
   label: string;
   placeholder?: string;
   options: { label: string; value: string }[];
-  control: Control<any>;
+  control: Control<FieldValues>;
   error?: FieldError;
   required?: boolean;
 }

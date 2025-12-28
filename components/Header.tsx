@@ -2,7 +2,6 @@ import Link from "next/dist/client/link";
 import Image from "next/image";
 import NavItems from "./NavItems";
 import { DropDown } from "./DropDown";
-import TradingWidget from "./TradingWidget";
 
 const Header = () => {
 
@@ -21,7 +20,6 @@ const Header = () => {
       </div>
 
     </header>
-    <TradingWidget />
     </div>
   )
 }
