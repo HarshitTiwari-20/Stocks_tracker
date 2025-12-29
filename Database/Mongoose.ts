@@ -33,5 +33,7 @@ export async function connectToDatabase(){
 
   }
 
-  console.log(`Mongodb connected: ${process.env.NODE_ENV}  ${MONGODB_URI}`);
+  console.log(`Mongodb connected to: ${process.env.NODE_ENV}  ${MONGODB_URI}`);
 }
+
+
