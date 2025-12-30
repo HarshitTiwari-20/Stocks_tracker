@@ -19,9 +19,9 @@ interface TradingWidgetProps {
 
 
 function TradingWidget({
-  title, scriptUrl, config, height = 600, className
+  title, scriptUrl = '', config = {}, height = 600, className
 }: TradingWidgetProps) {
-  const containerRef = useTradingViewWidget( scriptUrl, config, height );
+  const containerRef = useTradingViewWidget(scriptUrl, config, height);
 
 
   return (
