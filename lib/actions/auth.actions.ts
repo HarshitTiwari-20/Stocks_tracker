@@ -4,6 +4,17 @@ import { headers } from "next/headers"
 import { auth } from "../better-auth/auth"
 import { inngest } from "../inngest/client"
 
+// interface SignUpFormData {
+//   email: string
+//   password: string
+//   fullName: string
+// }
+
+// interface SignInFormData {
+//   email: string
+//   password: string
+// }
+
 
 
 //---------------------------------------------------------------
@@ -53,7 +64,7 @@ export const singOut = async () => {
   try {
     await auth.api.signOut({ headers: await headers()})
   } catch (e) {
-    console.log(' DignOut fail', e)
+    console.log(' SignOut fail', e)
     return { success: false, error: ' Sign out failed'}
   }
 
