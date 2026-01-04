@@ -14,6 +14,13 @@ import { LogOut, User as UserIcon, CreditCard, Users, Settings } from "lucide-re
 import NavItems from "./NavItems";
 import { signOut } from "better-auth/api";
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  image?: string;
+}
+
 interface DropDownProps {
   user: User;
   initialStocks: any;
@@ -36,7 +43,7 @@ export const DropDown = ({ user, initialStocks }: DropDownProps) => {
             className="flex items-center gap-3 rounded-full  hover:bg-gray-200 p-1 transition-colors  "
           >
             <Avatar className="h-9 w-9 ">
-              <AvatarImage src="https://github.com/shadcn.png" alt={user.name} />
+              <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback className="bg-yellow-500 text-white  text-sm font-bold">
                 {user.name
                   .split(" ")

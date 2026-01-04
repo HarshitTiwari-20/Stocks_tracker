@@ -1,8 +1,8 @@
 'use server'
 
 
-import { connectToDatabase } from '@/database/mongoose';
-import { Watchlist } from '@/database/models/watchlist.model';
+import { connectToDatabase } from '@/Database/Mongoose';
+import { Watchlist } from '@/Database/models/watchlist.model';
 
 export async function getWatchlistSymbolsByEmail(email: string): Promise<string[]> {
   if (!email) return [];
