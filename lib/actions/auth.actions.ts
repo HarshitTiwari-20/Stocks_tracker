@@ -60,7 +60,7 @@ export const signInWithEmail = async ({ email, password }: SignInFormData ) => {
 
 
 
-export const singOut = async () => {
+export const signOut = async () => {
   try {
     await auth.api.signOut({ headers: await headers()})
   } catch (e) {

@@ -2,7 +2,8 @@ import Link from "next/dist/client/link";
 import Image from "next/image";
 import NavItems from "./NavItems";
 import { DropDown } from "./DropDown";
-import { searchStocks } from "@/lib/actions/finnhub.actions";
+
+
 
 
 interface User {
@@ -13,7 +14,6 @@ interface User {
 }
 
 const Header = async ({ user }: { user?: User }) => {
-  const initialStocks = await searchStocks();
 
   return (
     <div>
@@ -26,7 +26,7 @@ const Header = async ({ user }: { user?: User }) => {
           <nav className="hidden sm:block">
             <NavItems />
           </nav>
-          {user && <DropDown user={user} initialStocks={initialStocks} />}
+          {user && <DropDown user={user} />}
         </div>
 
       </header>

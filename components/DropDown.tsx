@@ -23,10 +23,9 @@ interface User {
 
 interface DropDownProps {
   user: User;
-  initialStocks: any;
 }
 
-export const DropDown = ({ user, initialStocks }: DropDownProps) => {
+export const DropDown = ({ user }: DropDownProps) => {
   const router = useRouter();
 
   const handleSignOut = async () => {

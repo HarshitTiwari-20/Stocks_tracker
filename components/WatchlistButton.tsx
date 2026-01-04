@@ -2,9 +2,16 @@
 import React, { useMemo, useState } from "react";
 
 
+interface WatchlistButtonProps {
+  symbol: string;
+  isInWatchlist?: boolean;
+  showTrashIcon?: boolean;
+  type?: "button" | "icon";
+  onWatchlistChange?: (symbol: string, isAdded: boolean) => void;
+}
+
 const WatchlistButton = ({
   symbol,
-  company,
   isInWatchlist,
   showTrashIcon = false,
   type = "button",
