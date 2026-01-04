@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation"; // Correct import for App Router
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, User as UserIcon, CreditCard, Users, Settings } from "lucide-react"; // Optional icons
 import NavItems from "./NavItems";
-import { signOut } from "better-auth/api";
+import {signOut} from "@/lib/actions/auth.actions";
 
 interface User {
   id: string;
@@ -84,10 +84,7 @@ export const DropDown = ({ user }: DropDownProps) => {
           <span>Report</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem className="cursor-pointer">
-          <Users className="mr-2 h-4 w-4" />
-          <span>Team</span>
-        </DropdownMenuItem>
+       
 
         <DropdownMenuItem className="cursor-pointer">
           <Settings className="mr-2 h-4 w-4" />

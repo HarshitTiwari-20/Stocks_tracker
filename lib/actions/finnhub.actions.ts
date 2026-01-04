@@ -3,6 +3,7 @@
 import { getDateRange, validateArticle, formatArticle } from '@/lib/utils';
 import { POPULAR_STOCK_SYMBOLS } from '@/lib/const';
 import { cache } from 'react';
+import { FinnhubSearchResponse, FinnhubSearchResult, StockWithWatchlistStatus } from '@/lib/types';
 
 const FINNHUB_BASE_URL = 'https://finnhub.io/api/v1';
 const NEXT_PUBLIC_FINNHUB_API_KEY = process.env.NEXT_PUBLIC_FINNHUB_API_KEY ?? '';
@@ -181,5 +182,77 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
   } catch (err) {
     console.error('Error in stock search:', err);
     return [];
+  }
+});
+
+export interface PortfolioStock {
+  symbol: string;
+  name: string;
+  price: number;
+  change: number;
+  changePercent: number;
+  marketCap?: number;
+  peRatio?: number;
+  currency?: string;
+  logo?: string;
+}
+
+export const getPortfolioDetails = cache(async (symbols: string[]): Promise<PortfolioStock[]> => {
+  if (!symbols || symbols.length === 0) return [];
+
+  const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;
+  if (!token) return [];
+
+  const results = await Promise.all(
+    symbols.map(async (sym) => {
+      try {
+        // Fetch Profile for Name, Market Cap, PE using cache
+        const profileUrl = `${FINNHUB_BASE_URL}/stock/profile2?symbol=${encodeURIComponent(sym)}&token=${token}`;
+        const profile = await fetchJSON<FinnhubCompanyProfile2 & { logo?: string; marketCapitalization?: number; shareOutstanding?: number; currency?: string }>(profileUrl, 86400); // 24h cache for static data
+
+        // Fetch Quote for Price, Change using shorter cache
+        const quoteUrl = `${FINNHUB_BASE_URL}/quote?symbol=${encodeURIComponent(sym)}&token=${token}`;
+        // Using 60s revalidate for price
+        const quote = await fetchJSON<{ c: number; d: number; dp: number }>(quoteUrl, 0);
+
+        const name = profile.name || sym;
+
+        return {
+          symbol: sym,
+          name: name,
+          price: quote.c || 0,
+          change: quote.d || 0,
+          changePercent: quote.dp || 0,
+          marketCap: profile.marketCapitalization,
+          currency: profile.currency,
+          logo: profile.logo
+        } as PortfolioStock;
+      } catch (e) {
+        console.error(`Error fetching details for ${sym}`, e);
+        return null;
+      }
+    })
+  );
+
+  return results.filter((r): r is PortfolioStock => r !== null);
+});
+
+export const getMarketTrends = cache(async () => {
+  try {
+    const stocks = await getPortfolioDetails(POPULAR_STOCK_SYMBOLS);
+
+    // Sort by change percent descending for gainers
+    const gainers = [...stocks].sort((a, b) => b.changePercent - a.changePercent).slice(0, 10);
+
+    // Sort by change percent ascending for losers (or just take the bottom ones)
+    const losers = [...stocks].sort((a, b) => a.changePercent - b.changePercent).slice(0, 10);
+
+    return {
+      gainers,
+      losers
+    };
+  } catch (error) {
+    console.error('Error fetching market trends:', error);
+    return { gainers: [], losers: [] };
   }
 });

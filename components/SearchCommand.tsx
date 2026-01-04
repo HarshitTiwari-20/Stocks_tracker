@@ -1,13 +1,21 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { CommandDialog, CommandEmpty, CommandInput, CommandList } from "@/components/ui/command"
+import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Button } from "@/components/ui/button";
-import { Loader2, TrendingUp } from "lucide-react";
+import { Loader2, Star, TrendingUp } from "lucide-react";
 import Link from "next/link";
+
 import { searchStocks } from "@/lib/actions/finnhub.actions";
 import { useDebounce } from "@/hooks/useDebounce";
 
+import { StockWithWatchlistStatus } from "@/lib/types";
+
+interface SearchCommandProps {
+  renderAs?: 'button' | 'text';
+  label?: string;
+  initialStocks: StockWithWatchlistStatus[];
+}
 
 export default function SearchCommand({ renderAs = 'button', label = 'Add stock', initialStocks }: SearchCommandProps) {
   const [open, setOpen] = useState(false)
@@ -45,12 +53,9 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
 
   const debouncedSearch = useDebounce(handleSearch, 300);
 
-
-
-
   useEffect(() => {
     debouncedSearch();
-  }, [debouncedSearch, searchTerm]);
+  }, [searchTerm]);
 
   const handleSelectStock = () => {
     setOpen(false);
@@ -87,7 +92,7 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
                 {isSearchMode ? 'Search results' : 'Popular stocks'}
                 {` `}({displayStocks?.length || 0})
               </div>
-              {displayStocks?.map((stock) => (
+              {displayStocks?.map((stock, i) => (
                 <li key={stock.symbol} className="search-item">
                   <Link
                     href={`/stocks/${stock.symbol}`}
