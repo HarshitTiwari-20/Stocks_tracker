@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation"; // Correct import for App Router
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, User as UserIcon, CreditCard, Users, Settings } from "lucide-react"; // Optional icons
+import { LogOut, User as UserIcon, CreditCard, Settings } from "lucide-react"; // Optional icons
 import NavItems from "./NavItems";
 import {signOut} from "@/lib/actions/auth.actions";
 
@@ -84,7 +84,7 @@ export const DropDown = ({ user }: DropDownProps) => {
           <span>Report</span>
         </DropdownMenuItem>
 
-       
+
 
         <DropdownMenuItem className="cursor-pointer">
           <Settings className="mr-2 h-4 w-4" />

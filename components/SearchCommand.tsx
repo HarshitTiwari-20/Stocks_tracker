@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { CommandDialog, CommandEmpty, CommandInput, CommandList } from "@/components/ui/command"
 import { Button } from "@/components/ui/button";
-import { Loader2, Star, TrendingUp } from "lucide-react";
+import { Loader2, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 import { searchStocks } from "@/lib/actions/finnhub.actions";
@@ -55,7 +55,7 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
 
   useEffect(() => {
     debouncedSearch();
-  }, [searchTerm]);
+  }, [searchTerm, debouncedSearch]);
 
   const handleSelectStock = () => {
     setOpen(false);
@@ -92,7 +92,7 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
                 {isSearchMode ? 'Search results' : 'Popular stocks'}
                 {` `}({displayStocks?.length || 0})
               </div>
-              {displayStocks?.map((stock, i) => (
+              {displayStocks?.map((stock) => (
                 <li key={stock.symbol} className="search-item">
                   <Link
                     href={`/stocks/${stock.symbol}`}
