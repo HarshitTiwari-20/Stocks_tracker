@@ -38,9 +38,12 @@ const SignUp = () => {
   const onSubmit = async (data: SignUpFormData) => {
     try {
       const result = await signUpWithEmail(data);
-      if (result.success) route.push('/');
+      if (result.success)
+        console.log('Sign up successful');
+        route.push('/');
     } catch (error) {
       console.error('Sign up failed:', error);
+      console.log(error);
     }
   }
 

@@ -38,7 +38,9 @@ export default function SignIn() {
     }
     catch (error) {
       console.error('Sign in failed: ', error);
+      console.log(error);
     }
+    
   }
 
 
